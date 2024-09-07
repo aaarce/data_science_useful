@@ -30,3 +30,17 @@ df = pd.DataFrame(data)
 #print df
 print(df)
     
+#conditionals - simple example
+num = random.randint(1, 10)
+if num == 7:
+  print("Today")
+  print("is")
+  print("Your Lucky Day!")
+print(f"Number: {num}")
+
+#coin flip conditional
+flip = random.choice(["heads", "tails"])
+if flip == "heads":
+    print("coin flipped heads")
+else:
+    print("coin flipped tails")
