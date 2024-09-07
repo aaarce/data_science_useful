@@ -44,3 +44,26 @@ if flip == "heads":
     print("coin flipped heads")
 else:
     print("coin flipped tails")
+    
+#conditional simulation example roulette; further applying if-statements
+data = []
+for i in range(2001): #update range as needed +1 like 2001 will display last n-th simulation event
+    color = random.choice([
+        # 9 of 19 outcomes are red
+        "red", "red", "red", "red", "red", "red", "red", "red", "red",
+        #9 out of 19 outcomes are black
+        "black", "black", "black", "black", "black", "black", "black", "black", "black",
+        # 1 out of 19 outcomes is green
+        "green",
+    ])
+    
+    if color == "red":
+        profit = 1
+    else:
+        profit = -1
+        
+    d = {"color": color, "profit": profit}
+    data.append(d)
+    
+df = pd.DataFrame(data)          
+print(df)    
