@@ -33,3 +33,37 @@ for i in range(f_XY.shape[0]):
 mi = mi / np.log(2)  # Convert to bits (log base 2)---check later
 print("Estimated Mutual Information (I):", mi)
 
+
+##Simulation Part & Decision Logic (Based on Problem Logic)
+# Simulate under independence assumption
+n_simulations = 1000
+simulated_mi = []
+
+for _ in range(n_simulations):
+    # Generate a table under independence
+    simulated_counts = np.random.multinomial(n_total, np.outer(f_X, f_Y).ravel()).reshape(f_XY.shape)
+    
+    # Compute joint probabilities
+    simulated_f_XY = simulated_counts / n_total
+    
+    # Compute mutual information for the simulation
+    sim_mi = 0 ##must always also = 0?
+    for i in range(simulated_f_XY.shape[0]):
+        for j in range(simulated_f_XY.shape[1]):
+            if simulated_f_XY[i, j] > 0:  # Avoid log(0)  but explain....
+                sim_mi += simulated_f_XY[i, j] * np.log(simulated_f_XY[i, j] / (f_X[i] * f_Y[j]))
+
+    sim_mi = sim_mi / np.log(2)  # Convert to bits (log base 2) but explain rationale
+    simulated_mi.append(sim_mi)
+
+# Compare observed MI with simulated MI
+p_value = np.mean(np.array(simulated_mi) >= mi) ##rationale
+mid_point = np.mean(np.array(simulated_mi))
+
+#value "midpoint" checks
+print (mid_point)
+print(sim_mi)
+print(mi)
+print(p_value)
+
+print("P-value:", p_value)
