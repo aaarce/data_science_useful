@@ -75,3 +75,55 @@ if p_value < 0.05:
 else:
     print("Fail to reject null hypothesis, X and Y are independent.")
 
+##Further computations
+##below calculates the mutual information for I (X, Y) for a given count matrix nxy using values in problem / example
+import numpy as np
+
+def Ih(nxy):
+    """
+    Calculate Mutual Information (MI) I(X, Y) from a contingency table.
+    
+    Parameters:
+    nxy : 2D numpy array (nx x ny table of counts)
+    
+    Returns:
+    I : Mutual Information (MI) I(X, Y)
+    """
+    # Total sum of the contingency table
+    n = np.sum(nxy)
+    
+    # Normalized table of proportions
+    f = nxy / n
+    
+    # Row sums (marginal distribution for X)
+    fx = np.sum(f, axis=1)
+    
+    # Column sums (marginal distribution for Y)
+    fy = np.sum(f, axis=0)
+    
+    # Replace zeros in fx and fy with a small value (0.01)
+    fx[fx == 0] = 0.01
+    fy[fy == 0] = 0.01
+    
+    # Replace zeros in the normalized table f with a small value (0.01)
+    f[f == 0] = 0.01
+    
+    # Calculate the outer product of fx and fy
+    fxfy = np.outer(fx, fy)
+    
+    # Calculate the Mutual Information I(X, Y)
+    I = np.sum(f * np.log(f / fxfy))
+    
+    return I
+
+# Example usage:
+##nxy = np.array([[30, 10], [10, 50]])  # Example contingency table but plug in problem values
+nxy = np.array([
+    [10, 9, 2],
+    [10, 7, 2],
+    [17, 11, 5],
+    [22, 18, 7]
+])
+
+mi_value = Ih(nxy)
+print(f"Mutual Information: {mi_value}")
