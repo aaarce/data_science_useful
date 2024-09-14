@@ -66,4 +66,12 @@ print(sim_mi)
 print(mi)
 print(p_value)
 
+#final p-value
 print("P-value:", p_value)
+
+#interpreting p-value / results
+if p_value < 0.05:
+    print("Reject null hypothesis, X and Y are dependent.")
+else:
+    print("Fail to reject null hypothesis, X and Y are independent.")
+
