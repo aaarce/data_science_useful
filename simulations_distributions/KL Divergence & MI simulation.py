@@ -6,14 +6,30 @@ counts = np.array([[12, 11, 7],
                    [11, 15, 6],
                    [10, 12, 9],
                    [7, 9, 10]])
+print(counts)
 
 # Total count
 n_total = np.sum(counts)
+print(n_total)
 
 # Joint probability distribution f_{X,Y}(x,y)
 f_XY = counts / n_total
+print(f_XY) 
 
 
 # Compute marginal probabilities
 f_X = np.sum(f_XY, axis=1)  # Sum over rows
 f_Y = np.sum(f_XY, axis=0)  # Sum over columns
+print(f_X) #Compare to problem / example given
+print(f_Y) #Compare to problem / example given
+
+# Estimate mutual information or MI given formula
+mi = 0
+for i in range(f_XY.shape[0]):
+    for j in range(f_XY.shape[1]):
+        if f_XY[i, j] > 0:  # Avoid log(0)
+            mi += f_XY[i, j] * np.log(f_XY[i, j] / (f_X[i] * f_Y[j]))
+
+mi = mi / np.log(2)  # Convert to bits (log base 2)---check later
+print("Estimated Mutual Information (I):", mi)
+
