@@ -125,5 +125,94 @@ nxy = np.array([
     [22, 18, 7]
 ])
 
+print(nxy)
+
 mi_value = Ih(nxy)
 print(f"Mutual Information: {mi_value}")
+
+
+###not totally sure of this part
+###experiement or simulations 
+def sim(M, fxh, fyh):
+    """
+    Simulate Mutual Information (MI) values for M simulations.
+    
+    Parameters:
+    M : int, number of simulations
+    fxh : list or array, marginal distribution of X
+    fyh : list or array, marginal distribution of Y
+    
+
+    Ihm : numpy array of simulated MI values (length M)
+    """
+    n = np.sum(nxy)##n = 120  # Number of samples to match the table
+    print(n)
+    nx = len(fxh)  # Number of unique X values
+    ny = len(fyh)  # Number of unique Y values
+    
+    Ihm = np.zeros(M)  # Initialize vector to store MI results
+    
+    for m in range(M):
+        # Sample from the marginal distributions
+        xm = np.random.choice(np.arange(1, nx + 1), n, p=fxh, replace=True)
+        ym = np.random.choice(np.arange(1, ny + 1), n, p=fyh, replace=True)
+        
+        # Create a contingency table from the sampled values
+        nxym = np.zeros((nx, ny))
+        for i in range(n):
+            nxym[xm[i] - 1, ym[i] - 1] += 1
+        
+        # Calculate Mutual Information for the current simulation
+        Ihm[m] = Ih(nxym)
+    
+    return Ihm
+
+# Example usage:
+# Define marginal distributions for X and Y
+fxh = [0.25, 0.25, 0.25, 0.25]  # Uniform marginal distribution for X --unsure if this is properly set up
+fyh = [0.33, 0.33, 0.34]  # Nearly uniform marginal distribution for Y--unsure if this is properly set up
+
+# Number of simulations
+M = 100
+
+# Running the simulations
+Ihm_result = sim(M, fxh, fyh)
+
+
+# Output the first few simulated MI values
+print(Ihm_result[:10]) ##number of simulations can be adjusted in results
+
+
+##last computation
+
+def Ihmstar(Ihm):
+    """
+    Select threshold Ih* based on the 95th percentile from a list of Mutual Information (MI) values.
+    
+    Parameters:
+    Ihm : list or numpy array of MI values from simulations
+    
+    Returns:
+    Is : Threshold MI value (95th percentile)
+    """
+    M = len(Ihm)  # Get the number of MI values
+    istar = round(0.95 * M)  # 95th percentile index
+    Is = np.sort(Ihm)[istar]  # Sort the MI values and select the 95th percentile
+    
+    return Is
+
+print(Ihm_result)
+
+
+# Example usage:
+# Simulated Mutual Information values (Ihm) from 10 simulations
+Ihm_values = np.random.rand(100)  # Example random MI values (0 to 1)
+
+# Calculate the 95th percentile threshold
+threshold = Ihmstar(Ihm_values) ##not sure if should be random  or the Ihm_result derived think threshold2 is right....
+threshold2 = Ihmstar(Ihm_result)
+
+# Output the threshold value
+print(f"The 95th percentile MI threshold 1 is: {threshold}")
+print(f"The 95th percentile MI threshold 2 is: {threshold2}")##believe threshold2 is correct / to be utilized further
+
