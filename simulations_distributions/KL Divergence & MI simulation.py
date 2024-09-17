@@ -2,10 +2,18 @@
 import numpy as np
 
 # Given count data (generate this from table in the problem/example to work with...)
-counts = np.array([[12, 11, 7],
-                   [11, 15, 6],
-                   [10, 12, 9],
-                   [7, 9, 10]])
+counts = np.array([
+    [10, 9, 2],
+    [10, 7, 2],
+    [17, 11, 5],
+    [22, 18, 7]
+])
+#([[12, 11, 7],
+ #                  [11, 15, 6],
+  #                 [10, 12, 9],
+   #                [7, 9, 10]])
+
+
 print(counts)
 
 # Total count
@@ -61,10 +69,9 @@ p_value = np.mean(np.array(simulated_mi) >= mi) ##rationale
 mid_point = np.mean(np.array(simulated_mi))
 
 #value "midpoint" checks
-print (mid_point)
-print(sim_mi)
-print(mi)
-print(p_value)
+print ("Midpoint",mid_point)
+print("Simulated MI",sim_mi)
+print("Mutual Information",mi)
 
 #final p-value
 print("P-value:", p_value)
