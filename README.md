@@ -1,0 +1,1 @@
+This repository is primarily dedicated to helping solve statistics and probability problems. Hypothesis testing and foundational concepts taught in graduate level courses for data science statistical methods will be the scope of what is saved and published in this repository.
