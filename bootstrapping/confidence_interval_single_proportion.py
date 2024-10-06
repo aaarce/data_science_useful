@@ -46,9 +46,11 @@ p_women = x_women / n_women
 
 # Step 2: Calculate pooled proportion
 p_pooled = (x_men + x_women) / (n_men + n_women)
+print(f"{p_pooled} is the p_pooled")
 
 # Step 3: Compute the standard error
 se = np.sqrt(p_pooled * (1 - p_pooled) * (1/n_men + 1/n_women))
+print(f"{se} is the standard error")
 
 # Step 4: Calculate the z-score
 z = (p_men - p_women) / se
