@@ -1,0 +1,29 @@
+#Chi-Square Goodness of Fit Test Problem & Example Solution in Python
+#Problem Given: " In the StudentSurvey dataset, students chose which of the 3 awards they would prefer to 
+#win: Olympic medal, Nobel Prize, or Academy Award. Test the claim that 9% of the students in the 
+#population this represents prefer the Academy Award and the remaining students are evenly split 
+#between the other two awards. Use a theoretical distribution. "
+
+import numpy as np
+from scipy import stats
+
+# Observed values (data collected from the sample) -
+observed = np.array([31, 149, 182])
+
+# Expected values based on the hypothesis
+total_students = 362  # total from example problem dataset public Locke stats book 
+expected = np.array([0.09 * total_students, 0.455 * total_students, 0.455 * total_students])
+
+# Perform the Chi-Square test
+chi2_stat, p_value = stats.chisquare(observed, expected)
+
+# Print the results
+print(f"Chi-Square Statistic: {chi2_stat}")
+print(f"P-value: {p_value}") #note this setup gives same statistic (chi-square value) + p value as statkey (theoretic dist not randomization way)
+
+# Interpret the result
+alpha = 0.05  # significance level (not given in problem so assumed)
+if p_value < alpha:
+    print("Reject the null hypothesis (there is enough evidence to support the claim).")
+else:
+    print("Fail to reject the null hypothesis (there is not enough evidence to support the claim).")
