@@ -1,0 +1,31 @@
+#Chi-Square Association or Independence Test Problem & Example Solution in Python
+#In the StudentSurvey dataset, students chose which of the 3 awards they would prefer to 
+#win: Olympic medal, Nobel Prize, or Academy Award. The dataset also includes a column HigherSAT
+#indicating the part of the SAT in which the student made a higher score. Using exactly that column of 
+#values, test the claim that there is an association between the type of award a student prefers and 
+#their value in that HigherSat data column. Use a theoretical dist’n and Locke dataset 3rd ed.
+
+import numpy as np
+import pandas as pd
+from scipy.stats import chi2_contingency #new / haven't used before other inference tests
+
+# Step 1: Create the observed data table as it is created in Statkey with exact order specified for categories
+data = np.array([[116, 61],  # Olympic
+                 [68, 79],   # Nobel
+                 [21, 10]])  # Academy
+
+# Step 2: Perform the Chi-Square test using dataset in problem with built array following exact formula
+chi2_stat, p_value, dof, expected = chi2_contingency(data)
+
+# Step 3: Display the results
+print("Chi-Square Statistic:", chi2_stat)
+print("P-Value:", p_value)
+print("Degrees of Freedom:", dof)
+print("Expected Counts:")
+print(expected)
+
+# Step 4: Interpretation of p-value results obtained
+if p_value < 0.05:
+    print("Reject the null hypothesis: There is an association between award preference and SAT section.")
+else:
+    print("Fail to reject the null hypothesis: There is no significant association between award preference and SAT section.")
