@@ -22,3 +22,24 @@ print(f"Number of observations (n): {len(problem_9_data)}")
 print(f"MLE for theta (θ): {theta_9}")##problem 9
 print(f"MLE for theta (θ) squared: {theta_squared_9}")##problem 10
 
+###Problem 11-12
+import numpy as np
+
+# Data for Problem 11
+problem_11_data = [17.47, 9.1, 13.74, 30.68, 41.66, 16.53, 43.44, 21.18, 43.16, 74.17]
+
+# Known value of alpha
+alpha = 3.7
+
+# Step 1: Calculate MLE for theta
+sum_data = np.sum(problem_11_data)  # Sum of all x_i
+n = len(problem_11_data)  # Number of observations
+theta_hat = sum_data / (n * alpha)  # MLE for theta
+
+# Step 2: Calculate MLE for sqrt(theta)
+sqrt_theta_hat = np.sqrt(theta_hat)
+
+theta_hat, sqrt_theta_hat
+print(f"#Number of observations (n): {len(problem_11_data)}")
+print(f"MLE for theta (θ) (Prob 11): {theta_hat}")
+print(f"MLE for theta (θ) squared (Prob 12): {sqrt_theta_hat}")##problem 10
