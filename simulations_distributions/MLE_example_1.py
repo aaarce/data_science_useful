@@ -1,11 +1,13 @@
-##HMWK 12 Max Likelihood Estimation: Calculate MLE for theta and theta^2 problems 9-14
+##HMWK 12 Max Likelihood Estimation: Calculate MLE for theta and theta^2 
+# Problems 9-14
 import numpy as np
 
-# Step 1: Define datasets for Problems 9, 11, and 13
+# Step 1: Define datasets for Problems 9, 11, and 13 (ALL HERE)
 problem_9_data = [2.85, 11.07, 3.84, 7.92, 5.83, 8.81, 12.33, 9.74, 3.38, 21.91]
 problem_11_data = [17.47, 9.1, 13.74, 30.68, 41.66, 16.53, 43.44, 21.18, 43.16, 74.17]
 problem_13_data = [0.7, 0.83, 2.39, 1.98, 3.76, 2.24, 12.44, 7.34, 2.76, 14.03]
 
+# Problem 11-12
 # Step 2: Function to calculate MLE for theta and theta^2
 def calculate_theta_and_theta_squared(data):
     sum_data = np.sum(data)  # Sum of data
@@ -25,7 +27,7 @@ print(f"MLE for theta (θ) squared: {theta_squared_9}")##problem 10
 ###Problem 11-12
 import numpy as np
 
-# Data for Problem 11
+# Problem 11-12
 problem_11_data = [17.47, 9.1, 13.74, 30.68, 41.66, 16.53, 43.44, 21.18, 43.16, 74.17]
 
 # Known value of alpha
